@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todo-app-deployment
+  namespace: todo-app
+  labels:
+    app: todo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: todo-app
+  template:
+    metadata:
+      labels:
+        app: todo-app
+    spec:
+      containers:
+      - name: todo-nextjs
+        image: quay.io/rpailer/todo-app:latest
+        ports:
+        - containerPort: 3000
+          name: todo
+        env:
+          - name: SERVER_URL
+            valueFrom:
+              configMapKeyRef:
+                name: todo-config
+                key: SERVER_URL
