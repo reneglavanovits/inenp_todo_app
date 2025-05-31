@@ -43,7 +43,7 @@ WORKDIR /app
 
 ENV NODE_ENV production
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV PORT=8080
+# ENV PORT=8080
 
 # You only need to copy next.config.js if you are NOT using the default configuration
 # COPY --from=builder /app/next.config.js ./
@@ -55,6 +55,7 @@ COPY --from=builder --chown=1001:1001 /app/.next/static ./.next/static
 
 USER 1001:1001
 
-EXPOSE 8080
+# EXPOSE 8080
+EXPOSE 3000
 
 CMD ["npm", "start"]
