@@ -1,5 +1,5 @@
 import devTodos from "./data/devTodos";
-const db = require('../db');
+const db = require('./db');
 
 let todos = devTodos;
 
