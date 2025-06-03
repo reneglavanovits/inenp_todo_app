@@ -15,7 +15,7 @@ export default function TodoList (props) {
                     return (
                         <ListItem key={todo._id} divider={idx !== todos.list.length - 1}>
                             <Checkbox checked={todo.finished} onClick={() => onToggle(todo._id)}/>
-                            <ListItemText>{todo.text}</ListItemText>
+                            <ListItemText>{todo.title}</ListItemText>
                             <ListItemText>{todo.dueDate}</ListItemText>
                             <ListItemSecondaryAction>
                                 <IconButton aria-label="Delete Todo" onClick={() => onDelete(todo._id)}>
