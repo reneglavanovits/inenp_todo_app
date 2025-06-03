@@ -8,26 +8,33 @@ export default async function handler(req, res) {
     // switch the methods
     switch (req.method) {
         case 'GET': {
-            return getTodos(req, res);
+            return res.status(200).json({message: await getTodos(req, res), success: true});
         }
 
         case 'POST': {
-            return createTodo(req, res);
+            console.log(req);
+            await addTodo(req, res);
+            return res.status(200).json({message: "", success: true});
         }
 
         case 'PUT': {
-            return updateTodo(req, res);
+            console.log(req);
+            await updateTodo(req, res);
+            return res.status(200).json({message: {}, success: true});;
         }
 
         case 'DELETE': {
-            return deleteTodo(req, res);
+            console.log(req);
+            await deleteTodo(req, res);
+            return res.status(200).json({message: "", success: true});;
         }
     }
 }
 
 async function getTodos() {
-  const [rows] = await db.query('SELECT * FROM todos');
-  return rows;
+    console.log("get todos");
+    const rows = (await db.query('SELECT * FROM todos')).at(0);
+    return JSON.parse(JSON.stringify(rows));
 }
 
 async function addTodo(title) {

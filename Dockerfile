@@ -55,7 +55,6 @@ COPY --from=builder --chown=1001:1001 /app/.next/static ./.next/static
 
 USER 1001:1001
 
-# EXPOSE 8080
 EXPOSE 3000
 
 CMD ["npm", "start"]

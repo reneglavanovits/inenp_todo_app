@@ -100,7 +100,7 @@ export async function getServerSideProps(ctx) {
   // get the current environment
   let { SERVER_URL } = process.env;
   if (!SERVER_URL) {
-    SERVER_URL = "http://127.0.0.1:3000";
+    SERVER_URL = "http://localhost:3000";
   }
   console.log("SERVER_URL=" + SERVER_URL);
 
