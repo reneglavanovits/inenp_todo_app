@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     // switch the methods
     switch (req.method) {
         case 'GET': {
-            return res.status(200).json({message: await getTodos(req, res), success: true});
+            return res.status(200).json({message: {list: await getTodos(req, res)}, success: true});
         }
 
         case 'POST': {
