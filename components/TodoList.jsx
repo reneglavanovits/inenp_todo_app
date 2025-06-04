@@ -13,12 +13,12 @@ export default function TodoList (props) {
             <List>
                 {todos.list && todos.list.map((todo, idx) => {
                     return (
-                        <ListItem key={todo._id} divider={idx !== todos.list.length - 1}>
-                            <Checkbox checked={todo.finished} onClick={() => onToggle(todo._id)}/>
+                        <ListItem key={todo.id} divider={idx !== todos.list.length - 1}>
+                            <Checkbox checked={todo.completed} onClick={() => onToggle(todo.id)}/>
                             <ListItemText>{todo.title}</ListItemText>
                             <ListItemText>{todo.dueDate}</ListItemText>
                             <ListItemSecondaryAction>
-                                <IconButton aria-label="Delete Todo" onClick={() => onDelete(todo._id)}>
+                                <IconButton aria-label="Delete Todo" onClick={() => onDelete(todo.id)}>
                                     <DeleteOutlined />
                                 </IconButton>
                             </ListItemSecondaryAction>

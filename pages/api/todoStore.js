@@ -31,39 +31,32 @@ export default async function handler(req, res) {
     }
 }
 
-async function getTodos() {
+async function getTodos(req, res) {
     console.log("get todos");
     const rows = (await db.query('SELECT * FROM todos')).at(0);
     return JSON.parse(JSON.stringify(rows));
 }
 
-async function addTodo(title) {
-  const [result] = await db.query('INSERT INTO todos (title, completed) VALUES (?, ?)', [title, false]);
-  return { id: result.insertId, title, completed: false };
+async function addTodo(req, res) {
+    let newTodo = JSON.parse(req.body);
+    const [result] = await db.query('INSERT INTO todos (title, completed) VALUES (?, ?)', [newTodo.title, false]);
+    return { id: result.insertId, title, completed: false };
 }
 
-async function updateTodo(id, updates) {
+async function updateTodo(req, res) {
   const fields = [];
   const values = [];
-
-  if (updates.title !== undefined) {
-    fields.push('title = ?');
-    values.push(updates.title);
-  }
-  if (updates.completed !== undefined) {
-    fields.push('completed = ?');
-    values.push(updates.completed);
-  }
-
-  if (fields.length === 0) return;
-
+  
+  values.push(newTodo.title);
+  values.push(newTodo.completed);
   values.push(id);
 
-  await db.query(`UPDATE todos SET ${fields.join(', ')} WHERE id = ?`, values);
+  await db.query(`UPDATE todos SET title = ?, completed = ? WHERE id = ?`, [values]);
 }
 
-async function deleteTodo(id) {
-  await db.query('DELETE FROM todos WHERE id = ?', [id]);
+async function deleteTodo(req, res) {
+    let deleteTodo = JSON.parse(req.body);
+    await db.query('DELETE FROM todos WHERE id = ?', [deleteTodo.id]);
 }
 
 /* async function getTodos(req, res) {

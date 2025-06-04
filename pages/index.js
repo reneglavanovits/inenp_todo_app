@@ -13,7 +13,7 @@ export default function Home(todos) {
 
   const onDelete = async (id) => {
     console.log("onDelete: " + id);
-    let todo = todos.list.find(t => t._id === id);
+    let todo = todos.list.find(t => t.id === id);
     let response = await fetch('/api/' + storePath, {
       method: 'DELETE',
       body: JSON.stringify(todo),
@@ -32,7 +32,7 @@ export default function Home(todos) {
   const onToggle = async (id) => {
     console.log("onToggle: " + id);
     if (todos.list) {
-      let todo = todos.list.find(t => t._id === id);
+      let todo = todos.list.find(t => t.id === id);
       let newTodo = {
         ...todo,
         finished: !todo.finished
@@ -60,8 +60,8 @@ export default function Home(todos) {
     console.log("onCreate:");
     console.log(input);
     let todo = {
-      _id: uuidv4(),
-      text: input,
+      id: uuidv4(),
+      title: input,
       finished: false,
     }
     let response = await fetch('/api/' + storePath, {
