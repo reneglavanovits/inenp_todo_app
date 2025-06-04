@@ -35,7 +35,7 @@ export default function Home(todos) {
       let todo = todos.list.find(t => t.id === id);
       let newTodo = {
         ...todo,
-        finished: !todo.finished
+        completed: !todo.completed
       }
       console.log("newTodo:");
       console.log(newTodo);
