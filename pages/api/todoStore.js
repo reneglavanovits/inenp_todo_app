@@ -45,11 +45,7 @@ async function updateTodo(req, res) {
 
   let updateTodo = JSON.parse(req.body);
 
-  values.push(updateTodo.title);
-  values.push(updateTodo.completed);
-  values.push(updateTodo.id);
-
-  await db.query(`UPDATE todos SET title = ?, completed = ? WHERE id = ?`, [values]);
+  await db.query(`UPDATE todos SET completed = ${updateTodo.completed} WHERE id = ${updateTodo.id}`);
 }
 
 async function deleteTodo(req, res) {
