@@ -62,7 +62,7 @@ export default function Home(todos) {
     let todo = {
       id: uuidv4(),
       title: input,
-      finished: false,
+      completed: false,
     }
     let response = await fetch('/api/' + storePath, {
       method: 'POST',
@@ -73,6 +73,7 @@ export default function Home(todos) {
     let data = await response.json();
 
     if (data.success) {
+      todos = await getServerSideProps();
     } else {
     }
 

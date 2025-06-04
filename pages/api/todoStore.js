@@ -12,19 +12,16 @@ export default async function handler(req, res) {
         }
 
         case 'POST': {
-            console.log(req);
             await addTodo(req, res);
             return res.status(200).json({message: "", success: true});
         }
 
         case 'PUT': {
-            console.log(req);
             await updateTodo(req, res);
             return res.status(200).json({message: {}, success: true});;
         }
 
         case 'DELETE': {
-            console.log(req);
             await deleteTodo(req, res);
             return res.status(200).json({message: "", success: true});;
         }
@@ -44,12 +41,13 @@ async function addTodo(req, res) {
 }
 
 async function updateTodo(req, res) {
-  const fields = [];
   const values = [];
-  
-  values.push(newTodo.title);
-  values.push(newTodo.completed);
-  values.push(id);
+
+  let updateTodo = JSON.parse(req.body);
+
+  values.push(updateTodo.title);
+  values.push(updateTodo.completed);
+  values.push(updateTodo.id);
 
   await db.query(`UPDATE todos SET title = ?, completed = ? WHERE id = ?`, [values]);
 }
