@@ -37,7 +37,7 @@ async function getTodos(req, res) {
 async function addTodo(req, res) {
     let newTodo = JSON.parse(req.body);
     const [result] = await db.query('INSERT INTO todos (title, completed) VALUES (?, ?)', [newTodo.title, false]);
-    return { id: result.insertId, title, completed: false };
+    return { };
 }
 
 async function updateTodo(req, res) {
