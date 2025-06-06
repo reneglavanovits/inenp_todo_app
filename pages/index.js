@@ -73,7 +73,7 @@ export default function Home(todos) {
     let data = await response.json();
 
     if (data.success) {
-      todos = await getServerSideProps();
+      //todos = await getServerSideProps();
     } else {
     }
 
